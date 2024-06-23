@@ -1,8 +1,6 @@
-import React, { useRef, useState } from "react";
-import { useGLTF, Text } from "@react-three/drei";
-import * as THREE from "three";
-import { createPortal } from "react-dom";
-import styles from "../../app/page.module.css";
+// @ts-nocheck
+import React, { useState } from "react";
+import { useGLTF } from "@react-three/drei";
 import data from "@/data.json";
 
 const colors = [
@@ -85,9 +83,6 @@ export function Steps({ num, stepProg }: { num: number; stepProg: number }) {
           color={active ? colors[stepProg][0] : colors[stepProg][1]}
         />
       </mesh>
-      {/* <Text fontSize={0.4} position={[2, num * 0.5, 0]}>
-        {data.data[num]}
-      </Text> */}
     </>
   );
 }
