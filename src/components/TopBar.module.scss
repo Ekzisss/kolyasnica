@@ -1,0 +1,19 @@
+.main {
+  background: var(--bgColor3);
+  height: 65px;
+  width: 100vw;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+  height: 100%;
+
+  h1 {
+    font-size: 3rem;
+    font-family: 'K';
+  }
+}
+

@@ -1,0 +1,122 @@
+{
+  "metadata": {},
+  "project": {
+    "shadows": true,
+    "shadowType": 1,
+    "toneMapping": 0,
+    "toneMappingExposure": 1
+  },
+  "camera": {
+    "metadata": {
+      "version": 4.6,
+      "type": "Object",
+      "generator": "Object3D.toJSON"
+    },
+    "object": {
+      "uuid": "aea86ff6-d908-4c99-a28d-71decfbf32a0",
+      "type": "PerspectiveCamera",
+      "name": "Camera",
+      "layers": 1,
+      "matrix": [
+        0.050774484933551856, -1.1102230246251565e-16, 0.9987101439755843, 0,
+        0.5710209658765979, 0.8204220088539079, -0.029030740904692598, 0,
+        -0.8193637825832245, 0.5717584519603696, 0.04165650492770723, 0,
+        -8.570783068381827, 5.0321530625147926, 0.15387489077464406, 1
+      ],
+      "up": [0, 1, 0],
+      "fov": 50,
+      "zoom": 1,
+      "near": 0.01,
+      "far": 1000,
+      "focus": 10,
+      "aspect": 1.704668838219327,
+      "filmGauge": 35,
+      "filmOffset": 0
+    }
+  },
+  "scene": {
+    "metadata": {
+      "version": 4.6,
+      "type": "Object",
+      "generator": "Object3D.toJSON"
+    },
+    "geometries": [
+      {
+        "uuid": "6c900a14-c72b-463d-b76e-2655e231b499",
+        "type": "BoxGeometry",
+        "width": 1,
+        "height": 1,
+        "depth": 1,
+        "widthSegments": 1,
+        "heightSegments": 1,
+        "depthSegments": 1
+      }
+    ],
+    "materials": [
+      {
+        "uuid": "4863f568-ce18-4496-b19b-7e0653f7dd39",
+        "type": "MeshStandardMaterial",
+        "color": 16777215,
+        "roughness": 1,
+        "metalness": 0,
+        "emissive": 0,
+        "envMapRotation": [0, 0, 0, "XYZ"],
+        "envMapIntensity": 1,
+        "blendColor": 0
+      }
+    ],
+    "object": {
+      "uuid": "6e701749-33f9-4870-b1da-1241e966ea44",
+      "type": "Scene",
+      "name": "Scene",
+      "layers": 1,
+      "matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+      "up": [0, 1, 0],
+      "children": [
+        {
+          "uuid": "893184fa-01cd-4643-8f19-6971bc0d15ec",
+          "type": "Mesh",
+          "name": "Box",
+          "layers": 1,
+          "matrix": [2.9, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+          "up": [0, 1, 0],
+          "geometry": "6c900a14-c72b-463d-b76e-2655e231b499",
+          "material": "4863f568-ce18-4496-b19b-7e0653f7dd39"
+        },
+        {
+          "uuid": "22fba04c-7d9d-4844-9e73-778774f431f9",
+          "type": "DirectionalLight",
+          "name": "DirectionalLight",
+          "layers": 1,
+          "matrix": [
+            1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.7059994249735664,
+            6.775954613035588, 5.138909744622938, 1
+          ],
+          "up": [0, 1, 0],
+          "color": 16777215,
+          "intensity": 1,
+          "shadow": {
+            "camera": {
+              "uuid": "0bdfe2ea-5cd9-4d7d-85b6-1694f024e091",
+              "type": "OrthographicCamera",
+              "layers": 1,
+              "up": [0, 1, 0],
+              "zoom": 1,
+              "left": -5,
+              "right": 5,
+              "top": 5,
+              "bottom": -5,
+              "near": 0.5,
+              "far": 500
+            }
+          }
+        }
+      ],
+      "backgroundRotation": [0, 0, 0, "XYZ"],
+      "environmentRotation": [0, 0, 0, "XYZ"]
+    }
+  },
+  "scripts": {},
+  "history": { "undos": [], "redos": [] },
+  "environment": null
+}

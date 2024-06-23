@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My first three.js app</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from "https://cdn.jsdelivr.net/npm/three/build/three.module.js";
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshBasicMaterial({
+        color: 0x01f000,
+        specular: 0x666666,
+        shininess: 25,
+      });
+      const cube = new THREE.Mesh(geometry, material);
+      cube.castShadow = true;
+      cube.receiveShadow = true;
+      scene.add(cube);
+
+      const directionalLight = new THREE.SpotLight(0x22f9f1, 200);
+      directionalLight.position.set(0, 4, 0);
+      directionalLight.target = cube;
+      scene.add(directionalLight);
+
+      directionalLight.castShadow = true;
+
+      directionalLight.shadow.mapSize.width = 2048;
+      directionalLight.shadow.mapSize.height = 2048;
+
+      directionalLight.shadow.camera.near = 2;
+      directionalLight.shadow.camera.far = 15;
+
+      directionalLight.shadow.camera.fov = 40;
+
+      directionalLight.shadow.bias = -0.005;
+
+      cube.rotation.x += 10;
+      cube.rotation.y += 10;
+
+      camera.position.z = 5;
+
+      function animate() {
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
+</html>
