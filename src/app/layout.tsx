@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     siteName: "Колёсница",
     images: [
       {
-        url: "https://kolyasnica.vercel.app/favicon.ico",
+        url: "https://kolyasnica.vercel.app/img.png",
       },
     ],
   },
