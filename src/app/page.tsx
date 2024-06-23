@@ -44,12 +44,9 @@ export default function Home() {
     async function getData() {
       const data = await axios({
         method: "GET",
-        url: "https://api.baserow.io/api/database/rows/table/315007/?user_field_names=true",
-        headers: {
-          Authorization: `Token ${process.env.NEXT_PUBLIC_TOKEN}`,
-        },
+        url: `/api`,
       });
-      setData(data.data.results);
+      setData(data.data);
     }
     getData();
   }, []);
