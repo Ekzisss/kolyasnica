@@ -1,5 +1,4 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import { Vector3 } from "three";
+import { useFrame } from "@react-three/fiber";
 
 export const Controller = ({
   active,

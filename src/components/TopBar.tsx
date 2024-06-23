@@ -2,24 +2,35 @@ import React from "react";
 import { FC, HTMLAttributes } from "react";
 import style from "./TopBar.module.scss";
 import Container from "./container";
-import Link from "next/link";
 
-const TopBar: FC<propTypes> = () => {
+const TopBar: FC<propTypes> = ({ setShowRules, showRules }) => {
   return (
     <div className={style.main}>
       <Container>
         <nav className={style.nav}>
-          <Link href="/info">Инфа</Link>
-          <h1>
-            <Link href=".">Колёсница</Link>
-          </h1>
-          <Link href="/redact">Редактировать</Link>
+          <div className={style.space}>
+            <button
+              onClick={() => setShowRules(!showRules)}
+              className={style.btn}
+            >
+              Правила
+            </button>
+          </div>
+          <h1>Колёсница</h1>
+          <div className={style.space}>
+            <button disabled className={style.btn}>
+              Редактировать
+            </button>
+          </div>
         </nav>
       </Container>
     </div>
   );
 };
 
-interface propTypes extends HTMLAttributes<HTMLDivElement> {}
+interface propTypes extends HTMLAttributes<HTMLDivElement> {
+  setShowRules: Function;
+  showRules: boolean;
+}
 
 export default TopBar;

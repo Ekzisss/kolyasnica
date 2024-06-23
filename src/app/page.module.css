@@ -6,9 +6,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem;
   height: calc(100vh - 60px);
   cursor: grab;
+  position: relative;
 }
 
 .main:active {
@@ -19,7 +19,7 @@
   position: absolute;
   /* height: 80px; */
   width: 300px;
-  background-color: black;
+  background-color: rgb(23, 23, 23);
   border-radius: 10px;
   border-bottom-left-radius: 0;
   padding: 0.5rem;

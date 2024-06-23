@@ -13,7 +13,31 @@
 
   h1 {
     font-size: 3rem;
-    font-family: 'K';
+    font-family: "Montserrat";
+  }
+
+  .space {
+    width: 150px;
+    text-align: center;
+  }
+
+  .btn {
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    font-size: inherit;
+    padding: 0.2rem;
+    cursor: pointer;
+    transition: 0.1s linear all;
+
+    &:hover {
+      letter-spacing: 0.2rem;
+    }
+
+    &:disabled {
+      color: #ebede767;
+      cursor:not-allowed;
+    }
   }
 }
 

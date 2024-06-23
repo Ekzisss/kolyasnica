@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Edges } from "@react-three/drei";
 import data from "@/data.json";
 
 const colors = [
@@ -59,8 +59,8 @@ export function Steps({ num, stepProg }: { num: number; stepProg: number }) {
 
   function mouseMoveHandler(e: any) {
     if (msg) {
-      msg.style.top = `${e.clientY - 110}px`;
-      msg.style.left = `${e.clientX + 30}px`;
+      msg.style.top = `${e.clientY - 110 - 65}px`;
+      msg.style.left = `${e.clientX + 10}px`;
     }
   }
 
@@ -81,6 +81,12 @@ export function Steps({ num, stepProg }: { num: number; stepProg: number }) {
       >
         <meshStandardMaterial
           color={active ? colors[stepProg][0] : colors[stepProg][1]}
+        />
+        <Edges
+          linewidth={1}
+          scale={1.01}
+          threshold={15} // Display edges only when the angle between two faces exceeds this value (default=15 degrees)
+          color="black"
         />
       </mesh>
     </>
