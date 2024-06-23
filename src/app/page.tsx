@@ -15,23 +15,25 @@ import { MouseEvent, useRef, useState } from "react";
 import { Controller } from "@/objects/Controller";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
-const vec = new Vector3(0, 0, 0);
+const vec = new Vector3(0, 5, 0);
+
+function stepProgression(num: number, current: number) {
+  if (num < current) return 0;
+  else if (num === current) return 1;
+  else return 2;
+}
 
 export default function Home() {
   const [grabbing, setGrabbing] = useState(false);
-  // const [{ objects, cycle }, set] = useState({ objects: [], cycle: 0 });
-  const currentStep = 64;
+  const currentStep = 40;
 
   const controller = useRef<OrbitControlsImpl>(null);
 
-  // console.log(objects);
-  // if (objects.length) {
-  //   objects[0].object.material.color.b = 1;
-  //   console.log(objects[0].object.material.color.b);
-  // }
-
   function ChangeHeight(e: MouseEvent) {
     if (!grabbing) return;
+    if (vec.y + e.movementY * 0.05 < 1) vec.set(vec.x, 1, vec.z);
+    if (vec.y + e.movementY * 0.05 > 28) vec.set(vec.x, 28, vec.z);
+
     vec.set(vec.x, vec.y + e.movementY * 0.05, vec.z);
   }
 
@@ -52,21 +54,35 @@ export default function Home() {
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
           minDistance={4}
-          maxDistance={20}
+          maxDistance={10}
           onStart={() => setGrabbing(true)}
           onEnd={() => setGrabbing(false)}
           enablePan={false}
         />
-        <Cylinder position={[0, 25, 0]} args={[1, 1, 50]}>
+        <Cylinder position={[0, 12.5, 0]} args={[1, 1, 25]}>
           <meshStandardMaterial color="gray" />
         </Cylinder>
-        {[...Array(100)].map((_, index) => (
-          <Steps currentStep={currentStep} key={index} num={index} />
+        {[...Array(50)].map((_, index) => (
+          <Steps
+            stepProg={stepProgression(index, currentStep)}
+            key={index}
+            num={index}
+          />
         ))}
         <Ground />
         <Controller controller={controller} active={grabbing} vec={vec} />
         {/* <CycleRaycast onChanged={(objects, cycle) => set({ objects, cycle })} /> */}
       </Canvas>
+      <div
+        // style={{ display: grabbing ? "none" : "block" }}
+        id="123"
+        className={styles.popup}
+      >
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus
+          quasi modi aut placeat hic voluptatum rerum praesentium, ab et,
+        </p>
+      </div>
     </main>
   );
 }

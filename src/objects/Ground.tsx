@@ -14,7 +14,7 @@ export const Ground = () => {
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
   return (
-    <mesh position={[0, -1, 0]} rotation-x={-Math.PI / 2}>
+    <mesh position={[0, 0, 0]} rotation-x={-Math.PI / 2}>
       <planeGeometry args={[50, 50]} />
       <meshStandardMaterial map={texture} map-repeat={[10, 10]} />
     </mesh>

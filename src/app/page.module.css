@@ -14,3 +14,22 @@
 .main:active {
   cursor: grabbing;
 }
+
+.popup {
+  position: absolute;
+  /* height: 80px; */
+  width: 300px;
+  background-color: black;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  padding: 0.5rem;
+}
+
+.popup h1 {
+  font-size: 22px;
+}
+
+.popup h2 {
+  font-size: 16px;
+  padding-bottom: 0.5rem;
+}

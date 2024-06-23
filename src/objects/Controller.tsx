@@ -13,8 +13,6 @@ export const Controller = ({
   useFrame((state) => {
     if (!active) return;
 
-    vec.set(vec.x, vec.y, vec.z);
-
     controller.current.target = vec;
   });
 
