@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import { useGLTF, Edges } from "@react-three/drei";
-import data from "@/data.json";
+import jsonData from "@/data.json";
 
 const colors = [
   ["#2a7a29", "#359733"],
@@ -9,16 +9,27 @@ const colors = [
   ["#505050", "#636363"],
 ];
 
+function nameToNumber(name: string) {
+  switch (name) {
+    case "Пройдено":
+      break;
+    case "Пройдено":
+      break;
+  }
+}
+
 export function Steps({
   num,
   stepProg,
   setLocked,
   locked,
+  data,
 }: {
   num: number;
   stepProg: number;
   setLocked: Function;
   locked: number | null;
+  data: any;
 }) {
   const { nodes, materials } = useGLTF("/untitled.glb");
   const [active, setActive] = useState(false);
@@ -38,9 +49,11 @@ export function Steps({
     nodes.Circle12,
   ];
 
+  const newData = data.filter((item) => item.Step == num + 1);
+
   function updateMsg(e: any) {
     if (msg) {
-      msg.innerHTML = `<h1>Ступень №${num}</h1> <h2 style="color: ${
+      msg.innerHTML = `<h1>Ступень №${num + 1}</h1> <h2 style="color: ${
         colors[stepProg][0]
       }">${
         stepProg == 0
@@ -48,7 +61,16 @@ export function Steps({
           : stepProg === 1
           ? "Проходится"
           : "Не пройдено"
-      }</h2> <p>${data.data[num]}</p>`;
+      }</h2> 
+      <p style="padding-bottom: 10px">${jsonData.data[num]}</p>
+      ${newData.map(
+        (item) =>
+          `<p> ${item.Winner} - <span style="color: ${
+            item.Result?.value === "Пройдено" ? "#2a7a29" : "#bd2f2f"
+          }">${item.Result?.value}</span> </p>`
+      )}
+      `;
+
       msg.style.display = "block";
 
       msg.style.top = `${e.clientY - 110 - 65}px`;

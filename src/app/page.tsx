@@ -19,14 +19,16 @@ import { Car } from "@/objects/Car";
 import { Person } from "@/objects/Person";
 import { stepProgression, calculatePosition } from "@/utils";
 import Links from "@/components/Links";
+import axios from "axios";
 
-const currentStep = 38;
+const currentStep: number = Number(process.env.NEXT_PUBLIC_CURRENT_STEP);
 const vec = new Vector3(0, currentStep * 0.5 + 1.3, 0);
 
 export default function Home() {
   const [grabbing, setGrabbing] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [locked, setLocked] = useState(null);
+  const [data, setData] = useState([]);
 
   const controller = useRef<OrbitControlsImpl>(null);
 
@@ -37,6 +39,20 @@ export default function Home() {
 
     vec.set(vec.x, vec.y + e.movementY * 0.05, vec.z);
   }
+
+  useEffect(() => {
+    async function getData() {
+      const data = await axios({
+        method: "GET",
+        url: "https://api.baserow.io/api/database/rows/table/315007/?user_field_names=true",
+        headers: {
+          Authorization: `Token ${process.env.NEXT_PUBLIC_TOKEN}`,
+        },
+      });
+      setData(data.data.results);
+    }
+    getData();
+  }, []);
 
   useEffect(() => {
     if (locked) return;
@@ -81,6 +97,7 @@ export default function Home() {
             <Steps
               setLocked={setLocked}
               locked={locked}
+              data={data}
               stepProg={stepProgression(index, currentStep)}
               key={index}
               num={index}
