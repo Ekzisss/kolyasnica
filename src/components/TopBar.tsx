@@ -16,11 +16,16 @@ const TopBar: FC<propTypes> = ({ setShowRules, showRules }) => {
               Правила
             </button>
           </div>
-          <h1>Колёсница</h1>
+          <h1>
+            Кол <span></span> сница
+          </h1>
           <div className={style.space}>
-            <button disabled className={style.btn}>
-              Редактировать
-            </button>
+            <a
+              href="https://docs.google.com/spreadsheets/d/1XEjHHHd-EGni-rGN_hW1fCuNjn0CcR2BnR9GrBb4diU/edit?gid=442513571#gid=442513571"
+              className={style.btn}
+            >
+              Лог событий
+            </a>
           </div>
         </nav>
       </Container>

@@ -8,7 +8,7 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 import { Ground } from "@/objects/Ground";
-import { Steps } from "@/objects/steps/Steps";
+import { Steps } from "@/objects/Steps";
 import { Vector3 } from "three";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { Controller } from "@/objects/Controller";
@@ -18,14 +18,15 @@ import TopBar from "@/components/TopBar";
 import { Car } from "@/objects/Car";
 import { Person } from "@/objects/Person";
 import { stepProgression, calculatePosition } from "@/utils";
+import Links from "@/components/Links";
 
-const vec = new Vector3(0, 5, 0);
+const currentStep = 38;
+const vec = new Vector3(0, currentStep * 0.5 + 1.3, 0);
 
 export default function Home() {
   const [grabbing, setGrabbing] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [locked, setLocked] = useState(null);
-  const currentStep = 38;
 
   const controller = useRef<OrbitControlsImpl>(null);
 
@@ -102,6 +103,8 @@ export default function Home() {
           className={styles.popup}
         ></div>
         <Rules showRules={showRules} />
+
+        <Links />
       </main>
     </>
   );
