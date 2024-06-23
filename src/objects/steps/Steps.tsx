@@ -9,7 +9,17 @@ const colors = [
   ["#505050", "#636363"],
 ];
 
-export function Steps({ num, stepProg }: { num: number; stepProg: number }) {
+export function Steps({
+  num,
+  stepProg,
+  setLocked,
+  locked,
+}: {
+  num: number;
+  stepProg: number;
+  setLocked: Function;
+  locked: number | null;
+}) {
   const { nodes, materials } = useGLTF("/untitled.glb");
   const [active, setActive] = useState(false);
 
@@ -28,14 +38,7 @@ export function Steps({ num, stepProg }: { num: number; stepProg: number }) {
     nodes.Circle12,
   ];
 
-  function clickHandler(e: any) {
-    e.stopPropagation();
-    console.log(num);
-  }
-
-  function mouseEnterHandler(e: any) {
-    e.stopPropagation();
-    setActive(true);
+  function updateMsg(e: any) {
     if (msg) {
       msg.innerHTML = `<h1>Ступень №${num}</h1> <h2 style="color: ${
         colors[stepProg][0]
@@ -47,17 +50,37 @@ export function Steps({ num, stepProg }: { num: number; stepProg: number }) {
           : "Не пройдено"
       }</h2> <p>${data.data[num]}</p>`;
       msg.style.display = "block";
+
+      msg.style.top = `${e.clientY - 110 - 65}px`;
+      msg.style.left = `${e.clientX + 10}px`;
     }
+  }
+
+  function clickHandler(e: any) {
+    e.stopPropagation();
+    if (locked) {
+      updateMsg(e);
+    }
+    setLocked(num);
+  }
+
+  function mouseEnterHandler(e: any) {
+    e.stopPropagation();
+    setActive(true);
+    if (locked) return;
+    updateMsg(e);
   }
 
   function mouseLaveHandler(e: any) {
     setActive(false);
+    if (locked) return;
     if (msg) {
       msg.style.display = "none";
     }
   }
 
   function mouseMoveHandler(e: any) {
+    if (locked) return;
     if (msg) {
       msg.style.top = `${e.clientY - 110 - 65}px`;
       msg.style.left = `${e.clientX + 10}px`;

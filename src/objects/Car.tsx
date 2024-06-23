@@ -323,4 +323,4 @@ export function Car(props) {
   );
 }
 
-useGLTF.preload("/toy_car_2.glb");
+useGLTF.preload("/car.glb");
