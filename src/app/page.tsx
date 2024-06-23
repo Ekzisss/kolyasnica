@@ -13,6 +13,7 @@ import { Steps } from "@/objects/steps/Steps";
 import { Vector3 } from "three";
 import { MouseEvent, useRef, useState } from "react";
 import { Controller } from "@/objects/Controller";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 const vec = new Vector3(0, 0, 0);
 
@@ -21,7 +22,7 @@ export default function Home() {
   // const [{ objects, cycle }, set] = useState({ objects: [], cycle: 0 });
   const currentStep = 64;
 
-  const controller = useRef();
+  const controller = useRef<OrbitControlsImpl>(null);
 
   // console.log(objects);
   // if (objects.length) {

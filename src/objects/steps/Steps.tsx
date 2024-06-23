@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 
@@ -26,7 +27,7 @@ export function Steps({
     nodes.Circle12,
   ];
 
-  function clickHandler(e) {
+  function clickHandler(e: any) {
     e.stopPropagation();
     console.log(num);
   }
