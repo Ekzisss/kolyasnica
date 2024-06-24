@@ -6,16 +6,17 @@ import icon from "@/assets/icon.png";
 import { motion } from "framer-motion";
 import Rules from "../rules/Rules";
 import Loading from "../Loading";
+import axios from "axios";
 
 const Info: FC<propTypes> = ({ data }) => {
-  const [live, setLive] = useState(false);
+  const [streamerData, setStreamerData] = useState<any>([]);
 
-  console.log(data);
+  console.log(streamerData);
 
   useEffect(() => {
     async function getStreamer() {
-      let a = await fetch(`https://www.twitch.tv/f1ashko`);
-      setLive((await a.text()).includes("isLiveBroadcast"));
+      const res = await axios.get("/api/getLive");
+      setStreamerData(res.data);
     }
     try {
       getStreamer();
@@ -32,41 +33,49 @@ const Info: FC<propTypes> = ({ data }) => {
         </a>
         <div className={style.live__info}>
           <a href="https://www.twitch.tv/f1ashko">F1ashko</a>
-          {live ? (
-            <div className={style.live__detection}>
-              <div className={style.live__circle}>
-                <motion.div
-                  animate={{ scale: 1, opacity: 0 }}
-                  initial={{ scale: 0, opacity: 1 }}
-                  transition={{
-                    repeat: Infinity,
-                    repeatDelay: 0.6,
-                    duration: 2,
-                  }}
-                ></motion.div>
-                <motion.div
-                  animate={{ scale: 1, opacity: 0 }}
-                  initial={{ scale: 0, opacity: 1 }}
-                  transition={{
-                    repeat: Infinity,
-                    repeatDelay: 0.6,
-                    duration: 2,
-                    delay: 0.66,
-                  }}
-                ></motion.div>
-                <motion.div
-                  animate={{ scale: 1, opacity: 0 }}
-                  initial={{ scale: 0, opacity: 1 }}
-                  transition={{
-                    repeat: Infinity,
-                    repeatDelay: 0.6,
-                    duration: 2,
-                    delay: 1.33,
-                  }}
-                ></motion.div>
+          {streamerData?.length !== 0 ? (
+            <>
+              <div className={style.live__detection}>
+                <div className={style.live__circle}>
+                  <motion.div
+                    animate={{ scale: 1, opacity: 0 }}
+                    initial={{ scale: 0, opacity: 1 }}
+                    transition={{
+                      repeat: Infinity,
+                      repeatDelay: 0.6,
+                      duration: 2,
+                    }}
+                  ></motion.div>
+                  <motion.div
+                    animate={{ scale: 1, opacity: 0 }}
+                    initial={{ scale: 0, opacity: 1 }}
+                    transition={{
+                      repeat: Infinity,
+                      repeatDelay: 0.6,
+                      duration: 2,
+                      delay: 0.66,
+                    }}
+                  ></motion.div>
+                  <motion.div
+                    animate={{ scale: 1, opacity: 0 }}
+                    initial={{ scale: 0, opacity: 1 }}
+                    transition={{
+                      repeat: Infinity,
+                      repeatDelay: 0.6,
+                      duration: 2,
+                      delay: 1.33,
+                    }}
+                  ></motion.div>
+                </div>
+                <p>В эфире</p>
               </div>
-              <p>В эфире</p>
-            </div>
+              <p className={style.live__viewers}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
+                </svg>
+                <p>{streamerData[0].viewer_count}</p>
+              </p>
+            </>
           ) : (
             <div className={style.live__detection}>
               <div

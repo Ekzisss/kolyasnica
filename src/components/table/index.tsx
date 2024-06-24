@@ -23,7 +23,7 @@ const Table: FC<propTypes> = ({ data }) => {
           {newData.map((item, index) => (
             <div key={index} className={style.row}>
               <p>
-                {item[0].Step}. {jsonData.data[item[0].Step]}
+                {item[0].Step}. {jsonData.data[item[0].Step - 1]}
               </p>
               <div className={style.double}>
                 {item.map((item: any, index: any) => (

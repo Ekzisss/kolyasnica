@@ -33,6 +33,27 @@
     display: flex;
     gap: 10px;
     align-items: center;
+
+    p {
+      padding-right: 1rem;
+    }
+  }
+
+  &__viewers{
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    padding-left: 0.5rem;
+    padding-top: 0.3rem;
+
+    svg {
+      fill: #e63535;
+      width: 15px;
+      height: 15px;
+    }
+    p {
+      color: #e63535;
+    }
   }
 
   &__circle {
