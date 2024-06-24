@@ -44,12 +44,9 @@
     }
   }
 
-  .space {
-    width: 150px;
-    text-align: center;
-  }
-
   .btn {
+    position: absolute;
+    right: 30px;
     background-color: transparent;
     color: inherit;
     border: none;

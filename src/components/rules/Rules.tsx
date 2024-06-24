@@ -1,33 +1,21 @@
 import React from "react";
 import { FC, HTMLAttributes } from "react";
-import style from "./style.module.css";
+import style from "./style.module.scss";
 import data from "@/data.json";
-import { motion, AnimatePresence } from "framer-motion";
 
-const Rules: FC<propTypes> = ({ showRules }) => {
+const Rules: FC<propTypes> = () => {
   return (
-    <AnimatePresence>
-      {showRules && (
-        <motion.div
-          initial={{ x: -500 }}
-          animate={{ x: 0 }}
-          exit={{ x: -500 }}
-          className={style.main}
-        >
-          <h2>Правила</h2>
-          <ol>
-            {data.rules.map((item, index) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ol>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className={style.main}>
+      <h2>Правила</h2>
+      <ol>
+        {data.rules.map((item, index) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ol>
+    </div>
   );
 };
 
-interface propTypes extends HTMLAttributes<HTMLDivElement> {
-  showRules: boolean;
-}
+interface propTypes extends HTMLAttributes<HTMLDivElement> {}
 
 export default Rules;

@@ -1,0 +1,24 @@
+.main {
+  background-color: var(--bgColor3);
+  border: 1px solid var(--bgColor2);
+  padding: 1rem;
+  padding-left: 2.2rem;
+  padding-top: 1rem;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  cursor: auto;
+
+  h2 {
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 1rem;
+  }
+
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}

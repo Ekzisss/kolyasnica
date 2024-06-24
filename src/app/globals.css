@@ -2,10 +2,12 @@
 :root {
   --bgColor: #262626;
   --bgColor2: #303030;
-  --bgColor3: #1f1f1f;
+  --bgColor3: #111111;
   --textColor: #ebede7;
   --textColor2: rgb(200, 200, 200);
   --primaryColor: #d59e4d;
+
+  --border: 1px solid var(--bgColor2);
 }
 
 * {
