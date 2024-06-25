@@ -1,4 +1,4 @@
-import { useTexture, useGLTF, Cylinder } from "@react-three/drei";
+import { useTexture, Cylinder } from "@react-three/drei";
 import * as THREE from "three";
 
 import color from "@/assets/brick/Bricks076A_1K-JPG_Color.jpg";
@@ -40,5 +40,3 @@ export function Pillar() {
     </Cylinder>
   );
 }
-
-useGLTF.preload("/greek_pillar.glb");

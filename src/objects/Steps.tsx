@@ -133,6 +133,10 @@ export function Steps({
             position={calculatePosition2(num)}
             rotation={[0, Math.PI * (((num + 9) % 12) / 6) - 0.2, 0]}
             scale={[0.2, 0.2, 0.4]}
+            onClick={clickHandler}
+            onPointerOver={mouseEnterHandler}
+            onPointerMove={mouseMoveHandler}
+            onPointerOut={mouseLaveHandler}
           >
             <meshStandardMaterial
               roughness={1}
