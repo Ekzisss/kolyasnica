@@ -60,3 +60,60 @@ export function calculatePosition(currentStep: number) {
   }
   return [x, y, z];
 }
+
+export function calculatePosition2(currentStep: number) {
+  let x = 0;
+  const y = -1;
+  let z = 0;
+  switch (currentStep % 12) {
+    case 0:
+      x = -1.7;
+      z = -0.5;
+      break;
+    case 1:
+      x = -1.9;
+      z = 0.5;
+      break;
+    case 2:
+      x = -1.5;
+      z = 1.5;
+      break;
+    case 3:
+      x = -0.5;
+      z = 1.7;
+      break;
+    case 4:
+      x = 0.5;
+      z = 1.8;
+      break;
+    case 5:
+      x = 1.3;
+      z = 1.3;
+      break;
+    case 6:
+      x = 1.7;
+      z = 0.5;
+      break;
+    case 7:
+      x = 1.8;
+      z = -0.5;
+      break;
+    case 8:
+      x = 1.4;
+      z = -1.4;
+      break;
+    case 9:
+      x = 0.5;
+      z = -1.8;
+      break;
+    case 10:
+      x = -0.45;
+      z = -1.8;
+      break;
+    case 11:
+      x = -1.2;
+      z = -1.2;
+      break;
+  }
+  return [x / 2.1, 0.13, z / 2.1];
+}

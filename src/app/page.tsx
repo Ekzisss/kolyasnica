@@ -16,6 +16,7 @@ import Links from "@/components/Links";
 import axios from "axios";
 import Table from "@/components/table";
 import Info from "@/components/info";
+import { Pillar } from "@/objects/Pillar";
 
 const currentStep: number = Number(process.env.NEXT_PUBLIC_CURRENT_STEP);
 const vec = new Vector3(0, currentStep * 0.5 + 1.3, 0);
@@ -25,6 +26,7 @@ export default function Home() {
   const [showRules, setShowRules] = useState(false);
   const [locked, setLocked] = useState(null);
   const [data, setData] = useState([]);
+  const [hoveredStep, setHoveredStep] = useState(null);
 
   const controller = useRef<OrbitControlsImpl>(null);
 
@@ -59,7 +61,7 @@ export default function Home() {
     <>
       <TopBar showRules={showRules} setShowRules={setShowRules} />
       <main className={styles.main}>
-        <Table data={data} />
+        <Table hoveredStep={hoveredStep} data={data} />
         <div className={styles.canvas}>
           <Canvas
             onPointerMove={ChangeHeight}
@@ -80,19 +82,14 @@ export default function Home() {
               onEnd={() => setGrabbing(false)}
               enablePan={false}
             />
-            <Cylinder
-              onPointerMove={(e) => e.stopPropagation()}
-              position={[0, 12.5, 0]}
-              args={[1, 1, 25]}
-            >
-              <meshStandardMaterial color="gray" />
-            </Cylinder>
+            <Pillar></Pillar>
             {[...Array(50)].map((_, index) => (
               <Steps
                 setLocked={setLocked}
                 locked={locked}
                 data={data}
                 stepProg={stepProgression(index, currentStep)}
+                setHoveredStep={setHoveredStep}
                 key={index}
                 num={index}
               />

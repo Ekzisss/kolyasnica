@@ -1,22 +1,21 @@
 // @ts-nocheck
 import React, { useState } from "react";
-import { useGLTF, Edges } from "@react-three/drei";
+import {
+  useGLTF,
+  Edges,
+  Decal,
+  Text,
+  RenderTexture,
+  PerspectiveCamera,
+} from "@react-three/drei";
 import jsonData from "@/data.json";
+import { calculatePosition2 } from "@/utils";
 
 const colors = [
-  ["#2a7a29", "#359733"],
-  ["#b27122", "#c67e27"],
-  ["#505050", "#636363"],
+  ["#49e946", "#3cb83a"],
+  ["#e08f2b", "#b27122"],
+  ["#ffffff", "#d4d4d4"],
 ];
-
-function nameToNumber(name: string) {
-  switch (name) {
-    case "Пройдено":
-      break;
-    case "Пройдено":
-      break;
-  }
-}
 
 export function Steps({
   num,
@@ -24,15 +23,19 @@ export function Steps({
   setLocked,
   locked,
   data,
+  setHoveredStep,
 }: {
   num: number;
   stepProg: number;
   setLocked: Function;
   locked: number | null;
   data: any;
+  setHoveredStep: Function;
 }) {
-  const { nodes, materials } = useGLTF("/untitled.glb");
+  const { nodes, materials } = useGLTF("/steps.glb");
   const [active, setActive] = useState(false);
+
+  // materials["Material.002"].color = "red";
 
   const arr = [
     nodes.Circle1,
@@ -66,8 +69,8 @@ export function Steps({
       ${newData.map(
         (item) =>
           `<p> ${item.Winner} - <span style="color: ${
-            item.Result?.value === "Пройдено" ? "#2a7a29" : "#bd2f2f"
-          }">${item.Result?.value}</span> </p>`
+            item.Result?.value === "Дропнуто" ? "#bd2f2f" : "#2a7a29"
+          }">${item.Result ? item.Result.value : ""}</span> </p>`
       )}
       `;
 
@@ -89,12 +92,14 @@ export function Steps({
   function mouseEnterHandler(e: any) {
     e.stopPropagation();
     setActive(true);
+    setHoveredStep(num + 1);
     if (locked) return;
     updateMsg(e);
   }
 
   function mouseLaveHandler(e: any) {
     setActive(false);
+    setHoveredStep(null);
     if (locked) return;
     if (msg) {
       msg.style.display = "none";
@@ -114,8 +119,6 @@ export function Steps({
   return (
     <>
       <mesh
-        castShadow
-        receiveShadow
         geometry={arr[num % 12].geometry}
         position={[0, num * 0.5, 0]}
         scale={[2.6, 2, 2.6]}
@@ -123,19 +126,45 @@ export function Steps({
         onPointerOver={mouseEnterHandler}
         onPointerMove={mouseMoveHandler}
         onPointerOut={mouseLaveHandler}
+        material={materials["Material.002"]}
       >
-        <meshStandardMaterial
-          color={active ? colors[stepProg][0] : colors[stepProg][1]}
-        />
-        <Edges
-          linewidth={1}
-          scale={1.01}
-          threshold={15} // Display edges only when the angle between two faces exceeds this value (default=15 degrees)
-          color="black"
-        />
+        {true ? (
+          <Decal
+            position={calculatePosition2(num)}
+            rotation={[0, Math.PI * (((num + 9) % 12) / 6) - 0.2, 0]}
+            scale={[0.2, 0.2, 0.4]}
+          >
+            <meshStandardMaterial
+              roughness={1}
+              transparent
+              polygonOffset
+              polygonOffsetFactor={-1}
+            >
+              <RenderTexture attach="map">
+                <PerspectiveCamera
+                  makeDefault
+                  manual
+                  aspect={0.9 / 0.25}
+                  position={[0, 0, 5]}
+                />
+                <Text
+                  scale={[2.5, 1, 1]}
+                  rotation={[0, 0, 0]}
+                  fontSize={4}
+                  color={active ? colors[stepProg][0] : colors[stepProg][1]}
+                >
+                  {num + 1}
+                </Text>
+              </RenderTexture>
+            </meshStandardMaterial>
+          </Decal>
+        ) : (
+          ""
+        )}
+        <Edges linewidth={1} scale={1.001} threshold={15} color="#2a2a2a" />
       </mesh>
     </>
   );
 }
 
-useGLTF.preload("/untitled.glb");
+useGLTF.preload("/steps.glb");

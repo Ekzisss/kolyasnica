@@ -11,9 +11,13 @@
   scrollbar-color: var(--bgColor2) transparent;
   scrollbar-width: thin;
 
+  transition: all 0.2s linear;
+
   .table {
     display: flex;
     flex-direction: column;
+    transition: all 0.2s linear;
+    position: relative;
 
     .row {
       position: relative;
@@ -21,6 +25,18 @@
       border: var(--border);
       border-bottom: none;
       height: 100%;
+
+      &:nth-child(even) {
+        background-color: var(--bgColor5);
+      }
+
+      &_top {
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        background-color: var(--bgColor3);
+      }
 
       p {
         width: 20%;
@@ -52,6 +68,7 @@
         .row {
           border: none;
           border-bottom: var(--border);
+          background-color: transparent;
 
           &:last-child {
             border-bottom: none;
@@ -66,6 +83,10 @@
           }
         }
       }
+    }
+
+    .row_glow {
+      background-color: var(--bgColor4) !important;
     }
   }
 }
