@@ -4,7 +4,8 @@ import { useState, useRef } from "react";
 import { Vector3 } from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
-const vec = new Vector3(0, 5, 0);
+const currentStep: number = Number(process.env.NEXT_PUBLIC_CURRENT_STEP);
+const vec = new Vector3(0, currentStep * 0.5 + 1.3, 0);
 
 function ChangeHeight(y: number) {
   if (vec.y - y * 7 < 1) vec.set(vec.x, 1, vec.z);

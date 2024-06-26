@@ -22,7 +22,6 @@ export default function Home() {
   const [showRules, setShowRules] = useState(false);
   const [locked, setLocked] = useState<boolean | null>(null);
   const [data, setData] = useState([]);
-  // const [hoveredStep, setHoveredStep] = useState(null);
 
   useEffect(() => {
     async function getData() {
