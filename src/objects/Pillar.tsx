@@ -31,6 +31,7 @@ export function Pillar() {
     >
       <meshStandardMaterial
         {...texture}
+        displacementScale={0.2}
         map-repeat={[2, 10]}
         roughnessMap-repeat={[2, 10]}
         normalMap-repeat={[2, 10]}

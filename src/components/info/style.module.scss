@@ -19,6 +19,8 @@
   gap: 1rem;
 
   &__info {
+    flex-grow: 1;
+
     a {
       border-bottom: 2px solid var(--primaryColor);
       width: 80px;
@@ -27,6 +29,11 @@
       font-size: 25px;
       display: block;
     }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
   }
 
   &__detection {
@@ -39,12 +46,18 @@
     }
   }
 
+  &__game {
+    flex-grow: 1;
+    text-align: center;
+  }
+
   &__viewers{
     display: flex;
     align-items: center;
     gap: 0.2rem;
-    padding-left: 0.5rem;
-    padding-top: 0.3rem;
+    padding-right: 0.5rem;
+    justify-content: center;
+    flex-grow: 1;
 
     svg {
       fill: #e63535;

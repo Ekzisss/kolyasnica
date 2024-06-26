@@ -24,6 +24,8 @@ export function Steps({
   locked,
   data,
   setHoveredStep,
+  nodes,
+  materials,
 }: {
   num: number;
   stepProg: number;
@@ -31,11 +33,10 @@ export function Steps({
   locked: number | null;
   data: any;
   setHoveredStep: Function;
+  nodes: any;
+  materials: any;
 }) {
-  const { nodes, materials } = useGLTF("/steps.glb");
   const [active, setActive] = useState(false);
-
-  // materials["Material.002"].color = "red";
 
   const arr = [
     nodes.Circle1,
@@ -170,5 +171,3 @@ export function Steps({
     </>
   );
 }
-
-useGLTF.preload("/steps.glb");

@@ -1,9 +1,8 @@
 "use client";
 import styles from "./page.module.css";
 import { Canvas } from "@react-three/fiber";
-import { Cylinder, OrbitControls, Loader } from "@react-three/drei";
+import { OrbitControls, Loader } from "@react-three/drei";
 import { Ground } from "@/objects/Ground";
-import { Steps } from "@/objects/Steps";
 import { Vector3 } from "three";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { Controller } from "@/objects/Controller";
@@ -17,6 +16,7 @@ import axios from "axios";
 import Table from "@/components/table";
 import Info from "@/components/info";
 import { Pillar } from "@/objects/Pillar";
+import StepsGen from "@/objects/StepsGen";
 
 const currentStep: number = Number(process.env.NEXT_PUBLIC_CURRENT_STEP);
 const vec = new Vector3(0, currentStep * 0.5 + 1.3, 0);
@@ -24,7 +24,7 @@ const vec = new Vector3(0, currentStep * 0.5 + 1.3, 0);
 export default function Home() {
   const [grabbing, setGrabbing] = useState(false);
   const [showRules, setShowRules] = useState(false);
-  const [locked, setLocked] = useState(null);
+  const [locked, setLocked] = useState<boolean | null>(null);
   const [data, setData] = useState([]);
   const [hoveredStep, setHoveredStep] = useState(null);
 
@@ -67,6 +67,7 @@ export default function Home() {
             onPointerMove={ChangeHeight}
             camera={{ position: [0, 0, 8] }}
             onPointerMissed={() => setLocked(null)}
+            frameloop="demand"
           >
             <ambientLight intensity={1.5} />
             <Controller controller={controller} active={grabbing} vec={vec} />
@@ -83,17 +84,13 @@ export default function Home() {
               enablePan={false}
             />
             <Pillar></Pillar>
-            {[...Array(50)].map((_, index) => (
-              <Steps
-                setLocked={setLocked}
-                locked={locked}
-                data={data}
-                stepProg={stepProgression(index, currentStep)}
-                setHoveredStep={setHoveredStep}
-                key={index}
-                num={index}
-              />
-            ))}
+            <StepsGen
+              setLocked={setLocked}
+              locked={locked}
+              data={data}
+              currentStep={currentStep}
+              setHoveredStep={setHoveredStep}
+            ></StepsGen>
             <Ground />
             <Car />
             <Person
