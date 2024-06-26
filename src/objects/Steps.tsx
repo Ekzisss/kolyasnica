@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import {
-  useGLTF,
   Edges,
   Decal,
   Text,
@@ -10,6 +9,7 @@ import {
 } from "@react-three/drei";
 import jsonData from "@/data.json";
 import { calculatePosition2 } from "@/utils";
+import { useHoveredStep } from "@/hooks/hoveredStep";
 
 const colors = [
   ["#49e946", "#3cb83a"],
@@ -23,7 +23,6 @@ export function Steps({
   setLocked,
   locked,
   data,
-  setHoveredStep,
   nodes,
   materials,
 }: {
@@ -32,11 +31,11 @@ export function Steps({
   setLocked: Function;
   locked: number | null;
   data: any;
-  setHoveredStep: Function;
   nodes: any;
   materials: any;
 }) {
   const [active, setActive] = useState(false);
+  const setHoveredStep = useHoveredStep((state) => state.setHoveredStep);
 
   const arr = [
     nodes.Circle1,
@@ -100,7 +99,6 @@ export function Steps({
 
   function mouseLaveHandler(e: any) {
     setActive(false);
-    setHoveredStep(null);
     if (locked) return;
     if (msg) {
       msg.style.display = "none";
@@ -129,43 +127,39 @@ export function Steps({
         onPointerOut={mouseLaveHandler}
         material={materials["Material.002"]}
       >
-        {true ? (
-          <Decal
-            position={calculatePosition2(num)}
-            rotation={[0, Math.PI * (((num + 9) % 12) / 6) - 0.2, 0]}
-            scale={[0.2, 0.2, 0.4]}
-            onClick={clickHandler}
-            onPointerOver={mouseEnterHandler}
-            onPointerMove={mouseMoveHandler}
-            onPointerOut={mouseLaveHandler}
+        <Decal
+          position={calculatePosition2(num)}
+          rotation={[0, Math.PI * (((num + 9) % 12) / 6) - 0.2, 0]}
+          scale={[0.2, 0.2, 0.4]}
+          onClick={clickHandler}
+          onPointerOver={mouseEnterHandler}
+          onPointerMove={mouseMoveHandler}
+          onPointerOut={mouseLaveHandler}
+        >
+          <meshStandardMaterial
+            roughness={1}
+            transparent
+            polygonOffset
+            polygonOffsetFactor={-1}
           >
-            <meshStandardMaterial
-              roughness={1}
-              transparent
-              polygonOffset
-              polygonOffsetFactor={-1}
-            >
-              <RenderTexture attach="map">
-                <PerspectiveCamera
-                  makeDefault
-                  manual
-                  aspect={0.9 / 0.25}
-                  position={[0, 0, 5]}
-                />
-                <Text
-                  scale={[2.5, 1, 1]}
-                  rotation={[0, 0, 0]}
-                  fontSize={4}
-                  color={active ? colors[stepProg][0] : colors[stepProg][1]}
-                >
-                  {num + 1}
-                </Text>
-              </RenderTexture>
-            </meshStandardMaterial>
-          </Decal>
-        ) : (
-          ""
-        )}
+            <RenderTexture frames={1} attach="map">
+              <PerspectiveCamera
+                makeDefault
+                manual
+                aspect={0.9 / 0.25}
+                position={[0, 0, 5]}
+              />
+              <Text
+                scale={[2.5, 1, 1]}
+                rotation={[0, 0, 0]}
+                fontSize={4}
+                color={active ? colors[stepProg][0] : colors[stepProg][1]}
+              >
+                {num + 1}
+              </Text>
+            </RenderTexture>
+          </meshStandardMaterial>
+        </Decal>
         <Edges linewidth={1} scale={1.001} threshold={15} color="#2a2a2a" />
       </mesh>
     </>

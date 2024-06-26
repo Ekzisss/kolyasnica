@@ -25,6 +25,7 @@ export function Pillar() {
 
   return (
     <Cylinder
+      key={98680768755}
       onPointerMove={(e) => e.stopPropagation()}
       position={[0, 12.5, 0]}
       args={[1, 1, 25]}

@@ -6,6 +6,7 @@ import { stepProgression, calculatePosition } from "@/utils";
 
 const StepsGen = (props: any) => {
   const { nodes, materials } = useGLTF("/steps.glb");
+  console.log("rerender steps");
 
   return (
     <>

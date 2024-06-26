@@ -4,11 +4,13 @@ import style from "./style.module.scss";
 import Loading from "../Loading";
 import jsonData from "@/data.json";
 import { animateScroll as scroll } from "react-scroll";
+import { useHoveredStep } from "@/hooks/hoveredStep";
 
-const Table: FC<propTypes> = ({ data, hoveredStep }) => {
+const Table: FC<propTypes> = ({ data }) => {
   const newData = [...Array(50)].map((_, index) =>
     data.filter((item: any) => item.Step == index + 1)
   );
+  const hoveredStep = useHoveredStep((state) => state.hoveredStep);
 
   useEffect(() => {
     if (!hoveredStep) return;
@@ -76,7 +78,6 @@ const Table: FC<propTypes> = ({ data, hoveredStep }) => {
 
 interface propTypes extends HTMLAttributes<HTMLDivElement> {
   data: any;
-  hoveredStep: any;
 }
 
 export default Table;
