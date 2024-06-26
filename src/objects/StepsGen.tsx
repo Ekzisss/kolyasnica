@@ -1,12 +1,11 @@
 import React from "react";
-import { FC, HTMLAttributes } from "react";
 import { Steps } from "./Steps";
 import { useGLTF } from "@react-three/drei";
-import { stepProgression, calculatePosition } from "@/utils";
+import { stepProgression } from "@/utils";
 
 const StepsGen = (props: any) => {
   const { nodes, materials } = useGLTF("/steps.glb");
-  console.log("rerender steps");
+  // console.log("rerender steps");
 
   return (
     <>

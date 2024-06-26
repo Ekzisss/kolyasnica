@@ -11,8 +11,6 @@ import axios from "axios";
 const Info: FC<propTypes> = ({ data }) => {
   const [streamerData, setStreamerData] = useState<any>([]);
 
-  console.log(streamerData);
-
   useEffect(() => {
     async function getStreamer() {
       const res = await axios.get("/api/getLive");

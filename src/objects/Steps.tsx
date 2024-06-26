@@ -10,6 +10,7 @@ import {
 import jsonData from "@/data.json";
 import { calculatePosition2 } from "@/utils";
 import { useHoveredStep } from "@/hooks/hoveredStep";
+import { invalidate } from "@react-three/fiber";
 
 const colors = [
   ["#49e946", "#3cb83a"],
@@ -112,6 +113,9 @@ export function Steps({
       msg.style.left = `${e.clientX + 10}px`;
     }
   }
+  useState(() => {
+    // invalidate();
+  }, []);
 
   const msg = document.getElementById("123");
 
@@ -142,7 +146,7 @@ export function Steps({
             polygonOffset
             polygonOffsetFactor={-1}
           >
-            <RenderTexture frames={1} attach="map">
+            <RenderTexture frames={2} attach="map">
               <PerspectiveCamera
                 makeDefault
                 manual
